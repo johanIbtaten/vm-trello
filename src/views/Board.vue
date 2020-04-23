@@ -1,6 +1,7 @@
 <template>
   <div class="board">
     <div class="flex flex-row items-start">
+      <!-- On parcourt les colonnes du trello -->
       <BoardColumn
         v-for="(column, $columnIndex) of board.columns"
         :key="$columnIndex"
@@ -42,7 +43,12 @@ export default {
     }
   },
   computed: {
+    // On récupère l'objet board depuis le state. Il contient
+    // toutes les données
     ...mapState(['board']),
+    // Si le nom de la route courante est task on renvoie true
+    // la modal est alors affichée sinon c'est false
+    // et la modal n'est pas affichée
     isTaskOpen () {
       return this.$route.name === 'task'
     }

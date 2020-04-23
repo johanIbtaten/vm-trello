@@ -5,6 +5,8 @@
     @dragover.prevent
     @dragenter.prevent
   >
+    <!-- slot qui contient l'élement que l'on veut rendre
+    draggable -->
     <slot/>
   </div>
 </template>
@@ -18,9 +20,13 @@ export default {
     }
   },
   methods: {
+    // Quand On commence à dragger
     onDrag (e) {
       e.dataTransfer.effectAllowed = 'move'
       e.dataTransfer.dropEffect = 'move'
+      // On stock l'objet transfertData dans les données à tranférer
+      // à l'endroit où l'on va drop l'élément, on stringify
+      // l'objet avant de le stocker
       e.dataTransfer.setData('payload', JSON.stringify(this.transferData))
     }
   }

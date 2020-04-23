@@ -13,6 +13,10 @@ export default new Router({
       path: '/',
       name: 'board',
       component: Board,
+      // Si l'URL /task/:id est appelé on affiche
+      // le composant Task dans le composant Board au niveau
+      // de <router-view/> car c'est une route enfant
+      // de board
       children: [
         {
           path: 'task/:id',

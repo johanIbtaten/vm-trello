@@ -1,7 +1,13 @@
 <template>
+  <!-- On écoute l'événement drop si il est déclenché on appelle
+  la méthode moveTaskOrColumn qui se treouve dans la mixin
+  movingTasksAndColumnsMixin -->
   <AppDrop
     @drop="moveTaskOrColumn"
   >
+    <!-- On passe la props :transferDatale qui contient un objet
+    qui définit le type d'élément qui déclenche le drag
+    ici type column et l'index de la colonne dans l'objet board -->
     <AppDrag
       class="column"
       :transferData="{
@@ -47,12 +53,6 @@ export default {
   },
   mixins: [movingTasksAndColumnsMixin],
   methods: {
-    pickupColumn (e, fromColumnIndex) {
-      e.dataTransfer.effectAllowed = 'move'
-      e.dataTransfer.dropEffect = 'move'
-      e.dataTransfer.setData('from-column-index', fromColumnIndex)
-      e.dataTransfer.setData('type', 'column')
-    },
     createTask (e, tasks) {
       this.$store.commit('CREATE_TASK', {
         tasks,

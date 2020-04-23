@@ -5,9 +5,16 @@ import { saveStatePlugin, uuid } from './utils'
 
 Vue.use(Vuex)
 
+// Si la propriété board est définie dans le localStorage
+// On récupère le JSON et on le parse en objet js pour
+// initialiser le state board sinon on initialise le state
+// avec l'objet defaultBoard
 const board = JSON.parse(localStorage.getItem('board')) || defaultBoard
 
 export default new Vuex.Store({
+  // On charge le plugin saveStatePlugin qui se charge
+  // de persister le store dans le localStorage quand il y a une
+  // mutation
   plugins: [saveStatePlugin],
   state: {
     board
@@ -48,9 +55,14 @@ export default new Vuex.Store({
       toTasks.splice(toTaskIndex, 0, taskToMove)
     },
     MOVE_COLUMN (state, { fromColumnIndex, toColumnIndex }) {
+      // On récupère le tableau des colonnes depuis le state board
       const columnList = state.board.columns
 
+      // On extrait l'objet colonne qui se trouve au niveau
+      // de l'index fromColumnIndex
       const columnToMove = columnList.splice(fromColumnIndex, 1)[0]
+      // On le met à la place de l'index de la colonne
+      // cible toColumnIndex
       columnList.splice(toColumnIndex, 0, columnToMove)
     }
   }
