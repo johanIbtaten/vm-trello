@@ -9,7 +9,7 @@
     qui définit le type d'élément qui déclenche le drag
     ici type column et l'index de la colonne dans l'objet board -->
     <AppDrag
-      class="column"
+      class="column relative"
       :transferData="{
         type: 'column',
         fromColumnIndex: columnIndex
@@ -18,6 +18,7 @@
       <div class="flex items-center mb-2 font-bold">
         {{ column.name }}
       </div>
+      <div class="close-column absolute p-2 text-right" @click="deleteColumn" title="Delete Column"><span>╳</span></div>
       <div class="list-reset">
         <ColumnTask
           v-for="(task, $taskIndex) of column.tasks"
@@ -59,6 +60,11 @@ export default {
         name: e.target.value
       })
       e.target.value = ''
+    },
+    deleteColumn () {
+      if (confirm('Are you sure you want to delete this column ?')) {
+        this.$store.commit('DELETE_COLUMN', this.columnIndex)
+      }
     }
   }
 }
@@ -68,5 +74,11 @@ export default {
 .column {
   @apply bg-grey-light p-2 mr-4 text-left shadow rounded;
   min-width: 350px;
+}
+.close-column {
+  font-size: 11px;
+  top: 0;
+  right: 5px;
+  cursor: pointer;
 }
 </style>

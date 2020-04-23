@@ -12,3 +12,13 @@ export function saveStatePlugin (store) {
     }
   )
 }
+
+export function truncateStringWords (str, truncNumber) {
+  let ending = ''
+  const wordsArray = str.split(' ')
+
+  if (wordsArray.length > truncNumber) {
+    ending = '…'
+  }
+  return wordsArray.splice(0, truncNumber).join(' ') + ending
+}
