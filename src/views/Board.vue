@@ -23,7 +23,7 @@
     <div
       class="task-bg"
       v-if="isTaskOpen"
-      @click.self="close"
+      @mousedown.self="close"
     >
       <router-view/>
     </div>
