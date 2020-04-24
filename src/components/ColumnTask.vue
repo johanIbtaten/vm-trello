@@ -31,7 +31,7 @@
 import movingTasksAndColumnsMixin from '@/mixins/movingTasksAndColumnsMixin'
 import AppDrag from './AppDrag'
 import AppDrop from './AppDrop'
-import { truncateStringWords } from '@/utils'
+// import { truncateStringWords } from '@/utils'
 export default {
   components: { AppDrag, AppDrop },
   mixins: [movingTasksAndColumnsMixin],
@@ -45,11 +45,11 @@ export default {
       required: true
     }
   },
-  computed: {
-    truncateDescription () {
-      return truncateStringWords(this.task.description, 10)
-    }
-  },
+  // computed: {
+  //   truncateDescription () {
+  //     return truncateStringWords(this.task.description, 10)
+  //   }
+  // },
   methods: {
     goToTask (task) {
       this.$router.push({ name: 'task', params: { id: task.id } })
