@@ -5,14 +5,14 @@
         type="text"
         class="p-2 w-full mr-2 block text-xl font-bold"
         :value="task.name"
-        @change="updateTaskProperty($event, 'name')"
+        @input="updateTaskProperty($event, 'name')"
         @keyup.enter="updateTaskProperty($event, 'name')"
       >
 
       <textarea
         class="relative w-full bg-transparent px-2 border mt-2 h-64 border-none leading-normal"
         :value="task.description"
-        @change="updateTaskProperty($event, 'description')"
+        @input="updateTaskProperty($event, 'description')"
       />
     </div>
   </div>
