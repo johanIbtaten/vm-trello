@@ -19,7 +19,8 @@
           v-if="task.description"
           class="w-full flex-no-shrink mt-1 text-sm"
         >
-          {{ truncateDescription }}
+          {{ /* truncateDescription */ }}
+          {{ task.description | truncate(10) }}
         </p>
       </div>
     </AppDrag>

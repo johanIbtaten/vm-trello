@@ -4,6 +4,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import AppButton from './components/AppButton'
+import truncateFilter from './filters/truncate'
+
+Vue.filter('truncate', truncateFilter)
 
 Vue.component('AppButton', AppButton)
 
