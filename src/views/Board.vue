@@ -26,7 +26,7 @@
       v-if="isTaskOpen"
       @mousedown.self="close"
     >
-      <router-view/>
+      <router-view @close-modal="close"/>
     </div>
   </div>
 </template>

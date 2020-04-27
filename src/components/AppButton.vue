@@ -1,31 +1,25 @@
 <template>
-  <button type="button" class="button" :class="typeClasses">
-    <slot/>
-  </button>
+    <button
+      v-on="$listeners"
+      v-bind="$attrs"
+      class="button"
+    >
+      <slot />
+    </button>
 </template>
 
 <script>
 export default {
-  props: {
-    type: {
-      type: String
-    }
-  },
-  computed: {
-    typeClasses () {
-      switch (this.type) {
-        case 'danger':
-          return 'bg-red'
-        default:
-          return 'bg-teal'
-      }
-    }
-  }
+  inheritAttrs: false
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 .button {
-  @apply inline-flex px-4 py-2 text-white font-bold rounded items-center;
+  @apply inline-flex px-4 py-2 text-white font-bold rounded items-center bg-teal;
+}
+
+.button:hover {
+  @apply bg-teal-dark;
 }
 </style>

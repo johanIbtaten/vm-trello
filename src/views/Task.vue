@@ -4,16 +4,13 @@
       <input
         type="text"
         class="p-2 w-full mr-2 block text-xl font-bold"
-        :value="task.name"
-        @input="updateTaskProperty($event, 'name')"
-        @keyup.enter="updateTaskProperty($event, 'name')"
+        v-model="name"
       >
-
       <textarea
         class="relative w-full bg-transparent px-2 border mt-2 h-64 border-none leading-normal"
-        :value="task.description"
-        @input="updateTaskProperty($event, 'description')"
+        v-model="description"
       />
+      <AppButton @click="saveTask">Sauver</AppButton>
     </div>
   </div>
 </template>
@@ -21,6 +18,12 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  data () {
+    return {
+      name: '',
+      description: ''
+    }
+  },
   computed: {
     ...mapGetters(['getTask']),
     task () {
@@ -28,13 +31,22 @@ export default {
     }
   },
   methods: {
-    updateTaskProperty (e, key) {
+    updateTaskProperty (key, value) {
       this.$store.commit('UPDATE_TASK', {
         task: this.task,
         key,
-        value: e.target.value
+        value
       })
+    },
+    saveTask () {
+      this.updateTaskProperty('name', this.name)
+      this.updateTaskProperty('description', this.description)
+      this.$emit('close-modal')
     }
+  },
+  created () {
+    this.name = this.task.name
+    this.description = this.task.description
   }
 }
 </script>
@@ -48,5 +60,10 @@ export default {
 .task-view textarea {
   border: 2px solid #efefef;
   padding: 10px 20px;
+  margin-bottom: 10px;
+}
+
+.button {
+  align-self: flex-end;
 }
 </style>
