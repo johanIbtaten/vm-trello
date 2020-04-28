@@ -19,9 +19,13 @@
 import { mapGetters } from 'vuex'
 export default {
   data () {
+    // let task = this.getTask(this.$route.params.id)
+    // console.log('task', task);
     return {
       name: '',
       description: ''
+      // name: task.name,
+      // description: task.name
     }
   },
   computed: {
@@ -31,16 +35,14 @@ export default {
     }
   },
   methods: {
-    updateTaskProperty (key, value) {
+    saveTask () {
       this.$store.commit('UPDATE_TASK', {
         task: this.task,
-        key,
-        value
+        taskPayload: {
+          name: this.name,
+          description: this.description
+        }
       })
-    },
-    saveTask () {
-      this.updateTaskProperty('name', this.name)
-      this.updateTaskProperty('description', this.description)
       this.$emit('close-modal')
     }
   },
