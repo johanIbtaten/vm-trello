@@ -55,11 +55,13 @@ export default {
   mixins: [movingTasksAndColumnsMixin],
   methods: {
     createTask (e, tasks) {
-      this.$store.commit('CREATE_TASK', {
-        tasks,
-        name: e.target.value
-      })
-      e.target.value = ''
+      if (e.target.value.trim() !== '') {
+        this.$store.commit('CREATE_TASK', {
+          tasks,
+          name: e.target.value
+        })
+        e.target.value = ''
+      }
     },
     deleteColumn () {
       if (confirm('Are you sure you want to delete this column ?')) {
